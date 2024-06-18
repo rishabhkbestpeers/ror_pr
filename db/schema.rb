@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_18_062824) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_18_111152) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "appointments", force: :cascade do |t|
+    t.bigint "physician_id"
+    t.bigint "patient_id"
+    t.datetime "appointment_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["patient_id"], name: "index_appointments_on_patient_id"
+    t.index ["physician_id"], name: "index_appointments_on_physician_id"
+  end
 
   create_table "authors", force: :cascade do |t|
     t.string "name"
@@ -28,6 +38,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_18_062824) do
     t.index ["author_id"], name: "index_books_on_author_id"
   end
 
+  create_table "patients", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "people", force: :cascade do |t|
     t.string "name"
     t.integer "Rollno"
@@ -37,6 +53,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_18_062824) do
     t.datetime "updated_at", null: false
     t.bigint "student_id"
     t.index ["student_id"], name: "index_people_on_student_id"
+  end
+
+  create_table "physicians", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "students", force: :cascade do |t|
