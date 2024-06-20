@@ -4,3 +4,5 @@ class Account < ApplicationRecord
     validates :supplier_id , uniqueness: { messages: "account with supplier id is already exist"};
     validates :account_number , uniqueness: { messages: "account with this Number is already exist"};
 end
+
+
